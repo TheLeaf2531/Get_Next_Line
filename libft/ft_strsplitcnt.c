@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplitcnt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 14:33:35 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/09 16:20:36 by vboissel         ###   ########.fr       */
+/*   Created: 2018/02/08 16:33:28 by vboissel          #+#    #+#             */
+/*   Updated: 2018/02/09 15:40:02 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_strsplit(char const *s, char c)
+size_t		ft_strsplitcnt(char const *s, char c)
 {
-	char	**tab;
 	size_t	words;
 	size_t	i;
-	size_t	y;
 
 	if (s == NULL || !c)
-		return (NULL);
-	i = -1;
+		return (0);
+	i = 0;
 	words = 0;
-	while (++i < ft_strlen(s))
-		words = (s[i] != c && (s[i - 1] == c || !i)) ? words + 1 : words;
-	if ((tab = malloc(sizeof(char*) * (words + 1))) == NULL)
-		return (NULL);
-	i = -1;
-	words = -1;
-	while (s[++i])
+	while (i < ft_strlen(s))
 	{
-		if (s[i] != c && (s[i - 1] == c || !i))
-			y = i;
-		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
-			tab[++words] = ft_strsub(s, y, i - y + 1);
+		words = (s[i] != c && (s[i - 1] == c || !i)) ? words + 1 : words;
+		i++;
 	}
-	tab[words + 1] = NULL;
-	return (tab);
+	return (words - 1);
 }

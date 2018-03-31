@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 18:15:17 by vboissel          #+#    #+#             */
-/*   Updated: 2017/12/15 19:26:14 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/03/27 16:16:06 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+typedef	struct	s_file
+{
+	int		fd;
+	char	*c_line;
+	char	*n_lines;
+}				t_file;
 
 typedef struct	s_list
 {
@@ -54,6 +64,8 @@ int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
+int				ft_isspace(int c);
+int				ft_issign(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 void			ft_putchar(char c);
@@ -94,5 +106,9 @@ t_list			*ft_strsplitlst(char const *s, char c);
 size_t			ft_strlenc(const char *str, char c);
 void			ft_lstrem(t_list **prev, t_list **to_del);
 size_t			ft_lstsrchi(t_list **lst, char *s);
+size_t			ft_striterc(char *s, int (*f)(int));
+size_t			ft_strsplitcnt(char const *s, char c);
+char			*ft_strncatf(char *s1, char*s2);
+int				ft_fchar(char c, char *str);
 
 #endif
